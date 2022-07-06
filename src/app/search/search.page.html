@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search Pokemon</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-searchbar [value]="" debounce="500"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let pokemon of pokemonList">
+      <ion-avatar slot="start">
+        <img [src]="pokemon.sprite">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{pokemon.name | titlecase}}</h2>
+        <p>{{pokemon.type | titlecase}}</p>
+      </ion-label>
+      <ion-button color="success">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                 loadingText="Loading more characters...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

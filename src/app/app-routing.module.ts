@@ -11,6 +11,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  },
+  {
+    path: 'party',
+    loadChildren: () => import('./party/party.module').then( m => m.PartyPageModule)
+  },
+  {
+    path: 'suggestions',
+    loadChildren: () => import('./suggestions/suggestions.module').then( m => m.SuggestionsPageModule)
+  },
 ];
 
 @NgModule({
