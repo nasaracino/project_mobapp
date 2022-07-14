@@ -66,7 +66,7 @@ export class SearchPage implements OnInit {
     if (this.searchText !== '') {
       this.pokemonList = [];
       console.log(this.pokemonList);
-      return this.pokemonDataService.getPokemon(this.pokemonList, this.limit, this. offset, this.searchText);
+      return this.pokemonDataService.getPokemon(this.pokemonList, this.limit, this. offset, this.searchText.toLowerCase());
     }
     return this.pokemonDataService.getPokemon(this.pokemonList, this.limit, this.offset);
   }
