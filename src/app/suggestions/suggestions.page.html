@@ -1,14 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Give a suggestion</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button default-href="/"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-navbar title="Give a suggestion"></app-navbar>
 
 <ion-content>
-  <form [formGroup]="suggestionsForm" (ngSubmit)="submitForm($event)" novalidate>
+  <form [formGroup]="suggestionsForm" (ngSubmit)="submitForm()" novalidate>
     <ion-input [(ngModel)]="inputName" formControlName="name" placeholder="Name" required="true"></ion-input>
     <ion-input [(ngModel)]="inputEmail" formControlName="email" placeholder="Email address" required="true"></ion-input>
     <ion-textarea rows="6" style="height: 150px"  [(ngModel)]="inputSuggestionText" formControlName="suggestionText" placeholder="Type your suggestion here" required="true"></ion-textarea>

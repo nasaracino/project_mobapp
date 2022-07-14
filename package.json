@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@capacitor/dialog": "^1.0.7",
+    "@capacitor/storage": "^1.2.5",
     "@capacitor/toast": "^1.0.8",
     "@emailjs/browser": "^3.6.2",
     "@ionic/angular": "^6.1.9",

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import emailjs, { EmailJSResponseStatus} from '@emailjs/browser';
-import { Toast } from '@capacitor/toast';
-import {ConfirmResult, Dialog} from '@capacitor/dialog';
+import emailjs from '@emailjs/browser';
+import {ToastanddialogService} from '../services/toastanddialog.service';
 
 @Component({
   selector: 'app-suggestions',
@@ -17,7 +16,7 @@ export class SuggestionsPage implements OnInit {
   suggestionsForm: FormGroup;
   isSubmitted = false;
 
-  constructor(public formBuilder: FormBuilder) {}
+  constructor(public formBuilder: FormBuilder, private toastAndDialog: ToastanddialogService) {}
   ngOnInit() {
     //Validatie regels van de input velden aanmaken
     this.suggestionsForm = this.formBuilder.group({
@@ -30,7 +29,7 @@ export class SuggestionsPage implements OnInit {
     this.isSubmitted = true;
     if (!this.suggestionsForm.valid) {
       //Toast met bericht om alle velden correct in te vullen
-      this.showToast('Please fill in all the fields.');
+      this.toastAndDialog.showToast('Please fill in all the fields.');
       return false;
     } else {
       this.templateParams = {
@@ -38,7 +37,7 @@ export class SuggestionsPage implements OnInit {
         email: this.inputEmail,
         suggestionText: this.inputSuggestionText
       };
-      this.showConfirm('Are you sure you want to send this message?').then((dialogResult) => {
+      this.toastAndDialog.showConfirm('Are you sure you want to send this message?').then((dialogResult) => {
         //Als de gebruiker op 'ok' drukt
         if (dialogResult.value) {
           //EmailJS aanspreken om een email te sturen
@@ -46,28 +45,14 @@ export class SuggestionsPage implements OnInit {
             .then((result) => {
               console.log(result.text);
               //Toast tonen met success bericht
-              this.showToast('Your email has been successfully sent!');
+              this.toastAndDialog.showToast('Your email has been successfully sent!');
             }, (error) => {
               console.log(error.text);
               //Toast tonen met bericht dat er iets misgelopen is met EmailJS
-              this.showToast('Something went wrong with sending your email. Please try again.');
+              this.toastAndDialog.showToast('Something went wrong with sending your email. Please try again.');
             });
         }
       });
     }
-  }
-  async showToast(msg: string) {
-       await Toast.show({
-      text: msg,
-      duration: 'long',
-      position: 'bottom'
-    });
-  }
-  async showConfirm(msg: string): Promise<ConfirmResult> {
-    const { value: value } = await Dialog.confirm({
-      title: 'Confirm',
-      message: msg
-    });
-    return { value };
   }
 }

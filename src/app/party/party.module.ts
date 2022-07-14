@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PartyPageRoutingModule } from './party-routing.module';
 
 import { PartyPage } from './party.page';
+import {NavbarComponent} from '../components/navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { PartyPage } from './party.page';
     IonicModule,
     PartyPageRoutingModule
   ],
-  declarations: [PartyPage]
+  exports: [
+    NavbarComponent
+  ],
+  declarations: [PartyPage, NavbarComponent]
 })
 export class PartyPageModule {}
